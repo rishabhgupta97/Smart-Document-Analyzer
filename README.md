@@ -1,6 +1,27 @@
 # 🧠 Smart Document Analyzer
 
-A full-stack web application that analyzes documents using AI-powered text extraction and analysis. Upload PDF, Word, or text files to get instant insights including word count, reading time, and content analysis.
+## Project Overview
+
+Smart Document Analyzer is a full-stack web application that allows users to upload PDF, Word, or text files and instantly receive AI-powered insights such as word count, reading time, and content analysis. The project demonstrates modern Java/Spring Boot backend and React frontend development, focusing on clean architecture, robust error handling, and a professional user experience.
+
+---
+
+## What is Implemented (MVP)
+
+- **Frontend (React 18):**
+
+  - Drag-and-drop document upload interface
+  - File type and size validation with user-friendly error messages
+  - Real-time display of analysis results (word count, character count, reading time, summary)
+  - Responsive design for desktop and mobile
+
+- **Backend (Spring Boot 3, Java 17+):**
+  - REST API for document upload and analysis
+  - Text extraction from PDF (Apache PDFBox), DOCX (Apache POI), and TXT files
+  - Content analysis: word/character count, reading time, summary
+  - Health check endpoint
+
+---
 
 ![Project Status](https://img.shields.io/badge/Status-MVP_Complete-brightgreen)
 ![Backend](https://img.shields.io/badge/Backend-Spring_Boot_3-green)
@@ -81,22 +102,22 @@ A full-stack web application that analyzes documents using AI-powered text extra
 - **npm** - Package management
 - **Git** - Version control
 
-## � Installation & Setup
+## 🛠️ Installation & Setup Guide
 
 ### Prerequisites
 
-- **Node.js 16+** and npm
-- **Java 17+**
-- **Maven 3.6+**
+- Node.js 16+ and npm
+- Java 17+
+- Maven 3.6+
 
-### 1. Clone Repository
+### 1. Clone the Repository
 
 ```bash
 git clone <repository-url>
 cd smart-document-analyzer
 ```
 
-### 2. Backend Setup
+### 2. Start the Backend
 
 ```bash
 cd backend
@@ -104,9 +125,9 @@ mvn clean install
 java -jar target/smart-document-analyzer-0.0.1-SNAPSHOT.jar
 ```
 
-Backend runs on: **http://localhost:8080**
+Backend will be available at: [http://localhost:8080](http://localhost:8080)
 
-### 3. Frontend Setup
+### 3. Start the Frontend
 
 ```bash
 cd frontend
@@ -114,12 +135,12 @@ npm install
 npm start
 ```
 
-Frontend runs on: **http://localhost:3000**
+Frontend will be available at: [http://localhost:3000](http://localhost:3000)
 
 ### 4. Verify Setup
 
-- Backend health check: `curl http://localhost:8080/api/documents/health`
-- Open browser: http://localhost:3000
+- Check backend health: `curl http://localhost:8080/api/documents/health`
+- Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## � API Documentation
 
@@ -187,12 +208,18 @@ curl -X POST -F "file=@test-document.txt" \
 
 ### Upload Interface
 
-- Clean drag-and-drop area
-- File type and size validation
-- Loading states with spinner
+![alt text](image.png)
 
 ### Analysis Results
 
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+**Features shown:**
+
+- Clean drag-and-drop area
+- File type and size validation
+- Loading spinner
 - File information display
 - Colorful metrics cards
 - Expandable text preview
