@@ -88,6 +88,60 @@ const AnalysisResult = ({ analysis, loading }) => {
         </div>
       )}
 
+      {/* AI Analysis Section */}
+      {(analysis.sentiment || analysis.keyPhrases || analysis.entities) && (
+        <div className="ai-analysis-section">
+          <h3>🤖 AI Analysis</h3>
+
+          {analysis.sentiment && (
+            <div className="sentiment-section">
+              <h4>😊 Sentiment Analysis</h4>
+              <div className="sentiment-result">
+                <div className="sentiment-label">
+                  Overall Sentiment:{' '}
+                  <span className={`sentiment-value sentiment-${analysis.sentiment.toLowerCase()}`}>
+                    {analysis.sentiment}
+                  </span>
+                </div>
+                {analysis.sentimentScore !== undefined && (
+                  <div className="sentiment-score">
+                    Confidence Score: <span className="score-value">{(analysis.sentimentScore * 100).toFixed(1)}%</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {analysis.keyPhrases && analysis.keyPhrases.length > 0 && (
+            <div className="key-phrases-section">
+              <h4>🔑 Key Phrases</h4>
+              <div className="key-phrases">
+                {analysis.keyPhrases.map((phrase, index) => (
+                  <span key={index} className="key-phrase-tag">
+                    {phrase}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {analysis.entities && analysis.entities.length > 0 && (
+            <div className="entities-section">
+              <h4>🏷️ Detected Entities</h4>
+              <div className="entities-grid">
+                {analysis.entities.map((entity, index) => (
+                  <div key={index} className="entity-item">
+                    <div className="entity-text">{entity.text}</div>
+                    <div className="entity-type">{entity.type}</div>
+                    <div className="entity-confidence">{(entity.confidence * 100).toFixed(0)}%</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {analysis.extractedText && (
         <div className="text-section">
           <h3>📄 Extracted Text</h3>
@@ -107,8 +161,8 @@ const AnalysisResult = ({ analysis, loading }) => {
 
       <div className="action-section mt-4">
         <div className="action-note">
-          💡 <strong>Coming Soon:</strong> Sentiment analysis, keyword extraction, and document categorization using AWS
-          AI services
+          ✅ <strong>AI-Powered Features:</strong> Sentiment analysis, key phrase extraction, and entity recognition are
+          now active!
         </div>
       </div>
     </div>

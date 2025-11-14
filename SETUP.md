@@ -7,6 +7,7 @@ This guide will help you set up the Smart Document Analyzer project on your loca
 Before you begin, make sure you have the following installed on your machine:
 
 ### Required Software
+
 - **Java 17 or higher** - [Download Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://adoptium.net/)
 - **Maven 3.6+** - [Download Maven](https://maven.apache.org/download.cgi)
 - **Node.js 16+** - [Download Node.js](https://nodejs.org/)
@@ -65,6 +66,7 @@ java -jar target/smart-document-analyzer-0.0.1-SNAPSHOT.jar
 ```
 
 **Alternative way to run backend:**
+
 ```bash
 # If the above JAR command doesn't work, try:
 mvn spring-boot:run
@@ -92,12 +94,15 @@ npm start
 ### Step 4: Verify Everything Works
 
 1. **Check Backend Health:**
+
    ```bash
    curl http://localhost:8080/api/documents/health
    ```
+
    Should return: `{"status":"UP","service":"Smart Document Analyzer API"}`
 
 2. **Open Frontend:**
+
    - Go to http://localhost:3000 in your browser
    - You should see the Smart Document Analyzer interface
 
@@ -113,12 +118,14 @@ npm start
 You'll need **two terminal windows** open:
 
 **Terminal 1 - Backend:**
+
 ```bash
 cd backend
 java -jar target/smart-document-analyzer-0.0.1-SNAPSHOT.jar
 ```
 
 **Terminal 2 - Frontend:**
+
 ```bash
 cd frontend
 npm start
@@ -127,12 +134,14 @@ npm start
 ### Making Changes
 
 **For Backend Changes:**
+
 1. Stop the backend server (Ctrl+C)
 2. Make your changes in Java files
 3. Rebuild: `mvn clean install`
 4. Restart: `java -jar target/smart-document-analyzer-0.0.1-SNAPSHOT.jar`
 
 **For Frontend Changes:**
+
 - The React development server automatically reloads when you save files
 - No need to restart
 
@@ -141,17 +150,19 @@ npm start
 ### Common Issues and Solutions
 
 #### 1. Port Already in Use
+
 ```bash
 # Error: Port 8080 is already in use
 # Solution: Find and kill the process using the port
 lsof -ti:8080 | xargs kill -9
 
-# Error: Port 3000 is already in use  
+# Error: Port 3000 is already in use
 # Solution: Find and kill the process using the port
 lsof -ti:3000 | xargs kill -9
 ```
 
 #### 2. Java Version Issues
+
 ```bash
 # Check if you have multiple Java versions
 java -version
@@ -165,6 +176,7 @@ echo $JAVA_HOME
 ```
 
 #### 3. Maven Build Failures
+
 ```bash
 # Clear Maven cache and rebuild
 mvn clean
@@ -173,6 +185,7 @@ mvn install
 ```
 
 #### 4. npm Install Issues
+
 ```bash
 # Clear npm cache
 npm cache clean --force
@@ -184,11 +197,13 @@ npm install
 ```
 
 #### 5. CORS Errors
+
 - Make sure backend is running on port 8080
 - Make sure frontend is running on port 3000
 - Check that both servers are running
 
 #### 6. File Upload Not Working
+
 - Verify backend is running and accessible
 - Check browser console for error messages
 - Ensure file is PDF, DOCX, or TXT format
@@ -197,6 +212,7 @@ npm install
 ### Checking Server Status
 
 **Backend Status:**
+
 ```bash
 # Check if backend is running
 curl http://localhost:8080/api/documents/health
@@ -205,6 +221,7 @@ curl http://localhost:8080/api/documents/health
 ```
 
 **Frontend Status:**
+
 - Check the terminal where you ran `npm start`
 - Look for compilation errors
 - Check browser developer console (F12)
@@ -217,7 +234,7 @@ Smart-Document-Analyzer/
 │   ├── src/main/java/               # Java source code
 │   │   └── com/analyzer/
 │   │       ├── controller/          # REST Controllers
-│   │       ├── service/             # Business Logic  
+│   │       ├── service/             # Business Logic
 │   │       └── model/               # Data Models
 │   ├── src/main/resources/          # Configuration files
 │   │   └── application.properties   # Spring Boot config
@@ -242,12 +259,14 @@ Smart-Document-Analyzer/
 ## 🔑 Key Endpoints
 
 ### Backend API Endpoints:
+
 - **Health Check**: `GET http://localhost:8080/api/documents/health`
 - **Upload Document**: `POST http://localhost:8080/api/documents/upload`
 - **Get Analysis**: `GET http://localhost:8080/api/documents/{id}/analysis`
 - **Get All Analyses**: `GET http://localhost:8080/api/documents/all`
 
 ### Frontend URL:
+
 - **Main Application**: `http://localhost:3000`
 
 ## 💡 Development Tips
@@ -255,7 +274,7 @@ Smart-Document-Analyzer/
 1. **Use two terminal windows** - one for backend, one for frontend
 2. **Keep both servers running** while developing
 3. **Check browser console** for frontend errors
-4. **Check terminal output** for backend errors  
+4. **Check terminal output** for backend errors
 5. **Use the test document** to verify functionality
 6. **Install browser extensions** like React Developer Tools for better debugging
 

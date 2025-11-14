@@ -2,6 +2,8 @@ package com.analyzer.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 public class DocumentAnalysis {
     private String id;
@@ -13,6 +15,12 @@ public class DocumentAnalysis {
     private int characterCount;
     private String readingTime;
     private String summary;
+
+    // AI Analysis fields
+    private String sentiment;
+    private double sentimentScore;
+    private List<String> keyPhrases;
+    private List<Map<String, Object>> entities;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime analyzedAt;
@@ -109,6 +117,39 @@ public class DocumentAnalysis {
 
     public void setAnalyzedAt(LocalDateTime analyzedAt) {
         this.analyzedAt = analyzedAt;
+    }
+
+    // AI Analysis getters and setters
+    public String getSentiment() {
+        return sentiment;
+    }
+
+    public void setSentiment(String sentiment) {
+        this.sentiment = sentiment;
+    }
+
+    public double getSentimentScore() {
+        return sentimentScore;
+    }
+
+    public void setSentimentScore(double sentimentScore) {
+        this.sentimentScore = sentimentScore;
+    }
+
+    public List<String> getKeyPhrases() {
+        return keyPhrases;
+    }
+
+    public void setKeyPhrases(List<String> keyPhrases) {
+        this.keyPhrases = keyPhrases;
+    }
+
+    public List<Map<String, Object>> getEntities() {
+        return entities;
+    }
+
+    public void setEntities(List<Map<String, Object>> entities) {
+        this.entities = entities;
     }
 
     private void calculateMetrics() {

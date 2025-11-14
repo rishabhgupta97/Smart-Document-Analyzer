@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,6 +21,12 @@ public class DocumentAnalysisService {
 
     // In-memory storage for demo - replace with database in production
     private final Map<String, DocumentAnalysis> analysisStorage = new ConcurrentHashMap<>();
+
+    private final AiAnalysisService aiAnalysisService;
+
+    public DocumentAnalysisService(AiAnalysisService aiAnalysisService) {
+        this.aiAnalysisService = aiAnalysisService;
+    }
 
     public DocumentAnalysis analyzeDocument(MultipartFile file) throws IOException {
         String documentId = UUID.randomUUID().toString();
@@ -32,6 +39,26 @@ public class DocumentAnalysisService {
         // Extract text based on file type
         String extractedText = extractText(file, fileType);
         analysis.setExtractedText(extractedText);
+
+        // Perform AI analysis on the extracted text
+        AiAnalysisService.ComprehensiveAnalysisResult aiResult = aiAnalysisService.analyzeDocument(extractedText);
+
+        // Set AI analysis results
+        analysis.setSentiment(aiResult.getSentiment().getSentiment());
+        analysis.setSentimentScore(aiResult.getSentiment().getPositiveScore());
+        analysis.setKeyPhrases(aiResult.getKeyPhrases());
+
+        // Convert entities to Map format for JSON serialization
+        List<Map<String, Object>> entityMaps = aiResult.getEntities().stream()
+                .map(entity -> {
+                    Map<String, Object> entityMap = new HashMap<>();
+                    entityMap.put("text", entity.getText());
+                    entityMap.put("type", entity.getType());
+                    entityMap.put("confidence", entity.getConfidence());
+                    return entityMap;
+                })
+                .toList();
+        analysis.setEntities(entityMaps);
 
         // Store analysis
         analysisStorage.put(documentId, analysis);
